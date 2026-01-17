@@ -78,14 +78,21 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
+
       {/*Testing to see if we have pizzas. If the pizza array is empty we are not going to show anything.*/}
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {/*Foreach wouldn't work in here we need JSX is by creating a new array.*/}
-          {pizzas.map((pizza) => (
-            <Pizza key={pizza.name} pizzaObject={pizza}></Pizza>
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {/*Foreach wouldn't work in here we need JSX is by creating a new array.*/}
+            {pizzas.map((pizza) => (
+              <Pizza key={pizza.name} pizzaObject={pizza}></Pizza>
+            ))}
+          </ul>
+        </>
       ) : (
         <p>Menu is being updated. We will be expecting you soon.</p>
       )}
@@ -105,6 +112,7 @@ function Menu() {
     </main>
   );
 }
+
 function Order({ close, closedDay }) {
   return (
     <div className="order" style={{ textAlign: "center" }}>
