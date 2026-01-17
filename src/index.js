@@ -74,8 +74,39 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza></Pizza>
+      <ul className="pizzas">
+        {/*Foreach wouldn't work in here we need JSX is by creating a new array.*/}
+        {pizzaData.map((pizza) => (
+          <Pizza key={pizza.name} pizzaObject={pizza}></Pizza>
+        ))}
+      </ul>
+      {/*<Pizza*/}
+      {/*  name="Pizza Spinaci"*/}
+      {/*  ingredients="Tomato, mozarella, spinach, and ricotta cheese"*/}
+      {/*  image="pizzas/spinaci.jpg"*/}
+      {/*  price={10}*/}
+      {/*></Pizza>*/}
+      {/*<Pizza*/}
+      {/*  name="Pizza Funghi"*/}
+      {/*  ingredients="Tomato, mushrooms , mozarella"*/}
+      {/*  image="pizzas/funghi.jpg"*/}
+      {/*  price={13}*/}
+      {/*/>*/}
     </main>
+  );
+}
+function Pizza(props) {
+  console.log(props);
+  // Return JSX
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name}></img>
+      <div>
+        <h3>{props.pizzaObject.name}</h3>
+        <p>{props.pizzaObject.ingredients}</p>
+        <span>{props.pizzaObject.price + 3}</span>
+      </div>
+    </li>
   );
 }
 function Footer() {
@@ -90,16 +121,6 @@ function Footer() {
       {new Date().toLocaleTimeString()}{" "}
       {isOpen ? "We are currently open!" : "Sorry we're currently closed!"}
     </footer>
-  );
-}
-function Pizza() {
-  // Return JSX
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza spinachi" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
   );
 }
 
