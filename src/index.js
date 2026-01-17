@@ -4,6 +4,7 @@
 // Same thing.
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -54,7 +55,7 @@ const pizzaData = [
 function App() {
   return (
     //   Nesting
-    <div>
+    <div className="container">
       <Header></Header>
       <Menu></Menu>
       <Footer></Footer>
@@ -63,14 +64,18 @@ function App() {
 }
 
 function Header() {
-  return <h1>Fast React Pizza Co.</h1>;
+  return (
+    <header className="header">
+      <h1>Fast React Pizza Co.</h1>;
+    </header>
+  );
 }
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <h2>Our Menu</h2>
       <Pizza></Pizza>
-    </div>
+    </main>
   );
 }
 function Footer() {
@@ -81,10 +86,10 @@ function Footer() {
   const isOpen = hour >= openHour && hour <= closingHour;
   console.log(isOpen);
   return (
-    <h2>
+    <footer className="footer">
       {new Date().toLocaleTimeString()}{" "}
       {isOpen ? "We are currently open!" : "Sorry we're currently closed!"}
-    </h2>
+    </footer>
   );
 }
 function Pizza() {
@@ -92,7 +97,7 @@ function Pizza() {
   return (
     <div>
       <img src="pizzas/spinaci.jpg" alt="Pizza spinachi" />
-      <h2>Pizza Spinaci</h2>
+      <h3>Pizza Spinaci</h3>
       <p>Tomato, mozarella, spinach, and ricotta cheese</p>
     </div>
   );
