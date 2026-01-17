@@ -152,16 +152,15 @@ function Footer() {
 function Pizza({ pizzaObject }) {
   console.log();
   // Return JSX
-  if (pizzaObject.soldOut) return null;
+  // if (pizzaObject.soldOut) return null;
 
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObject.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObject.photoName} alt={pizzaObject.name}></img>
       <div>
         <h3>{pizzaObject.name}</h3>
         <p>{pizzaObject.ingredients}</p>
-        <span>{pizzaObject.price + 3}</span>
-        <span>{pizzaObject.soldOut}</span>
+        <span>{pizzaObject.soldOut ? "SOLD OUT" : pizzaObject.price}</span>
       </div>
     </li>
   );
