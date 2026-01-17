@@ -71,15 +71,23 @@ function Header() {
   );
 }
 function Menu() {
+  // array is a truthy value.
+  const pizzas = [];
+  // this is a falsy values.
+  const numPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <ul className="pizzas">
-        {/*Foreach wouldn't work in here we need JSX is by creating a new array.*/}
-        {pizzaData.map((pizza) => (
-          <Pizza key={pizza.name} pizzaObject={pizza}></Pizza>
-        ))}
-      </ul>
+      {/*Testing to see if we have pizzas. If the pizza array is empty we are not going to show anything.*/}
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+          {/*Foreach wouldn't work in here we need JSX is by creating a new array.*/}
+          {pizzas.map((pizza) => (
+            <Pizza key={pizza.name} pizzaObject={pizza}></Pizza>
+          ))}
+        </ul>
+      )}
+
       {/*<Pizza*/}
       {/*  name="Pizza Spinaci"*/}
       {/*  ingredients="Tomato, mozarella, spinach, and ricotta cheese"*/}
@@ -118,8 +126,14 @@ function Footer() {
   console.log(isOpen);
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}{" "}
-      {isOpen ? "We are currently open!" : "Sorry we're currently closed!"}
+      {isOpen && (
+        <div className="order">
+          <p>
+            We are open until {closingHour}:00. Come visit us or order online.
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      )}
     </footer>
   );
 }
