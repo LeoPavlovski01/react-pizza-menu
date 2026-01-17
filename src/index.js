@@ -105,29 +105,23 @@ function Menu() {
     </main>
   );
 }
-function Pizza(props) {
-  console.log(props);
-  // Return JSX
-  if (props.pizzaObject.soldOut) return null;
-
+function Order({ close, closedDay }) {
   return (
-    <li className="pizza">
-      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name}></img>
-      <div>
-        <h3>{props.pizzaObject.name}</h3>
-        <p>{props.pizzaObject.ingredients}</p>
-        <span>{props.pizzaObject.price + 3}</span>
-        <span>{props.pizzaObject.soldOut}</span>
-      </div>
-    </li>
+    <div className="order" style={{ textAlign: "center" }}>
+      <p>We are open until {close}:00. Come visit us or order online.</p>
+      <p>Closed on : {closedDay}</p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
+
 function Footer() {
   // return React.createElement("footer", null, "We are currently open!");
   const hour = new Date().getHours();
   const openHour = 10;
   const closingHour = 22;
   const isOpen = hour >= openHour && hour <= closingHour;
+  const closeDay = "Sunday";
   console.log(isOpen);
 
   // if (!isOpen) {
@@ -137,18 +131,31 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>
-            We are open until {closingHour}:00. Come visit us or order online.
-          </p>
-          <button className="btn">Order</button>
-        </div>
+        <Order close={closingHour} closedDay={closeDay}></Order>
       ) : (
         <p>
           We're happy to welcome you between {openHour}:00 and {closingHour}:00.
         </p>
       )}
     </footer>
+  );
+}
+// Destructuring
+function Pizza({ pizzaObject }) {
+  console.log();
+  // Return JSX
+  if (pizzaObject.soldOut) return null;
+
+  return (
+    <li className="pizza">
+      <img src={pizzaObject.photoName} alt={pizzaObject.name}></img>
+      <div>
+        <h3>{pizzaObject.name}</h3>
+        <p>{pizzaObject.ingredients}</p>
+        <span>{pizzaObject.price + 3}</span>
+        <span>{pizzaObject.soldOut}</span>
+      </div>
+    </li>
   );
 }
 
