@@ -72,20 +72,22 @@ function Header() {
 }
 function Menu() {
   // array is a truthy value.
-  const pizzas = [];
+  const pizzas = pizzaData;
   // this is a falsy values.
   const numPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
       {/*Testing to see if we have pizzas. If the pizza array is empty we are not going to show anything.*/}
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {/*Foreach wouldn't work in here we need JSX is by creating a new array.*/}
           {pizzas.map((pizza) => (
             <Pizza key={pizza.name} pizzaObject={pizza}></Pizza>
           ))}
         </ul>
+      ) : (
+        <p>Menu is being updated. We will be expecting you soon.</p>
       )}
 
       {/*<Pizza*/}
@@ -106,6 +108,8 @@ function Menu() {
 function Pizza(props) {
   console.log(props);
   // Return JSX
+  if (props.pizzaObject.soldOut) return null;
+
   return (
     <li className="pizza">
       <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name}></img>
@@ -113,6 +117,7 @@ function Pizza(props) {
         <h3>{props.pizzaObject.name}</h3>
         <p>{props.pizzaObject.ingredients}</p>
         <span>{props.pizzaObject.price + 3}</span>
+        <span>{props.pizzaObject.soldOut}</span>
       </div>
     </li>
   );
@@ -120,19 +125,28 @@ function Pizza(props) {
 function Footer() {
   // return React.createElement("footer", null, "We are currently open!");
   const hour = new Date().getHours();
-  const openHour = 12;
+  const openHour = 10;
   const closingHour = 22;
   const isOpen = hour >= openHour && hour <= closingHour;
   console.log(isOpen);
+
+  // if (!isOpen) {
+  //   return <p>CLOSED</p>;
+  // }
+
   return (
     <footer className="footer">
-      {isOpen && (
+      {isOpen ? (
         <div className="order">
           <p>
             We are open until {closingHour}:00. Come visit us or order online.
           </p>
           <button className="btn">Order</button>
         </div>
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closingHour}:00.
+        </p>
       )}
     </footer>
   );
